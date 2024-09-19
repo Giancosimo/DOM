@@ -20,8 +20,19 @@ l'elemento fratello precedente del secondo li. -->
         <li>2</li>
         <li>3</li>
     </ul>
-    <script src="/ex1/ex1.js">
+    <script>
+        const html = document.documentElement;
+        const body = document.querySelector("body")
+        const ul = body.children[0];
+        const secondLi = ul.children[1];
 
+        secondLi.innerText = "ciao"
+
+        console.log(ul.parentElement);
+        console.log(secondLi);
+        console.log(secondLi.nextElementSibling.innerHTML);
+        console.log(secondLi.nextElementSibling);
+        console.log(secondLi.previousElementSibling);
     </script>
 </body>
 
