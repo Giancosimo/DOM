@@ -22,7 +22,16 @@ Al click del bottone inserisca la modalità dark -->
     <div>
         <button class="btn">Dark Mode</button>
     </div>
-    <script src="/ex5/ex5.js"></script>
+    <script>
+        const button = document.querySelector(".btn");
+
+        button.addEventListener("click", (event) => {
+            console.log("button event", event);
+            const body = document.querySelector("body");
+            body.classList.toggle("theme");
+        });
+
+    </script>
 </body>
 
 </html>
