@@ -1,0 +1,81 @@
+<!-- Lo scopo di questo task è di mostrare nella pagina una carta de "Il signore degli anelli" con:
+Nome del personaggio
+immagine del personaggio
+Prova a fetchare una card dal db del gioco di carte di Lord of the Rings, la documentazione dell'API la puoi trovare a
+questo link: https://ringsdb.com/api/doc
+Fai in modo che nella tua pagina html spuntino il nome del personaggio della carta, la sua immagine -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta - Il Signore degli Anelli</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .card-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .card-container h2 {
+            font-size: 24px;
+            margin: 0 0 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <h2 id="character-name">Caricamento...</h2>
+        <img id="character-image" src="" alt="Immagine del personaggio" />
+    </div>
+    <!-- non mi convince, vorrei lo rivedessimo insieme -->
+    <script>
+
+        async function fetchCard() {
+            try {
+                const response = await fetch('https://ringsdb.com/api/public/cards/');
+                const cards = await response.json();
+
+                const randomCard = cards[Math.floor(Math.random() * cards.length)];
+
+                document.getElementById('character-name').textContent = randomCard.name;
+                document.getElementById('character-image').src = randomCard.imagesrc;
+                document.getElementById('character-image').alt = randomCard.name;
+
+            } catch (error) {
+                console.error('Errore nel fetch:', error);
+                document.getElementById('character-name').textContent = "Errore nel caricamento.";
+            }
+        }
+
+        fetchCard();
+    </script>
+</body>
+
+</html>
